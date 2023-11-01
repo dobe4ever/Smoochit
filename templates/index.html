@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smoochit Test</title>
+    <link rel="stylesheet" type="text/css" href="./static/style.css">
+  </head>
+
+    <body>
+        <div class="main">
+            <img src="./static/logo.png" alt="Logo" class="logo">
+            <div class="chatbox" id="chatbox"></div>
+        </div>
+        <div class="bottom-container">
+            <div class="input-container">
+                <input type="text" id="message" placeholder="Type your message...">
+                <div id="send">➢</div>
+            </div>
+            <a href="#" class="link">Create your own chatbot powered by ChatGPT</a>
+        </div>
+
+    <script>
+        var userAvatarUrl = "./static/avatar-user-272x272.png";
+        var botAvatarUrl = "./static/avatar-bot-272x272.png";
+
+        var chatbox = document.getElementById("chatbox");
+        var message = document.getElementById("message");
+        var send = document.getElementById("send");
+
+        send.addEventListener("click", function() {
+          sendMessage();
+        });
+
+        message.addEventListener("keydown", function(event) {
+          if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            sendMessage();
+          }
+        });
+
+        function sendMessage() {
+          var userMessage = message.value;
+          if (userMessage.trim() === "") return; // If the message is empty or only whitespace, don't send
+
+          var userDiv = document.createElement("div");
+          userDiv.className = "message user";
+          userDiv.innerHTML = `<img src="${userAvatarUrl}" class="avatar user-avatar"> ${userMessage}`;
+          chatbox.appendChild(userDiv);
+
+          message.value = "";
+
+          fetch("/get_response?message=" + encodeURIComponent(userMessage))
+            .then(function(response) {
+              return response.text();
+            })
+            .then(function(botMessage) {
+              var botDiv = document.createElement("div");
+              botDiv.className = "message bot";
+              botMessage = botMessage.replace(/\n/g, '<br>');
+              botMessage = botMessage.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>'); 
+              botMessage = botMessage.replace(/\*(.*?)\*/g, '<i>$1</i>'); 
+              botMessage = botMessage.replace(/# (.*?)\n/g, '<h1>$1</h1>'); 
+              botDiv.innerHTML = `<img src="${botAvatarUrl}" class="avatar bot-avatar"> ${botMessage}`;
+              chatbox.appendChild(botDiv);
+
+              chatbox.scrollTop = chatbox.scrollHeight;
+            });
+        }
+    </script>
+
+    </body>
+</html>

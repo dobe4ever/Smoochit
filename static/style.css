@@ -1,57 +1,147 @@
-.html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+/* done */
+* {
+  font-family: system-ui, sans-serif;
 }
 
-.body {
-    font-family: sans-serif;
-    display: flex;
+/* done */
+html, body {
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  /* display: flex; */
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #ffffff;
-    font-family: Arial, sans-serif;
+body {
+  display: flex;
+  flex-direction: column;
 }
 
+/* done */
 .logo {
-    margin-bottom: 40px;
-    width: 200px;
-    height: 50px;
+  margin-top: 30px;
+  width: 50%;
 }
 
-.search-box {
-    width: 300px;
-    height: 30px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 50px;
-    font-size: 16px;
-    background-color: #fff;
-    text-align: center;
+/* done */
+.main {
+  flex: 1; /* The main area takes up remaining vertical space. */  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  /* height: 80vh; */
 }
 
-.search-button {
-    margin-top: 10px;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #EF4342; 
-    cursor: pointer;
+.chatbox {
+  flex: 1; /* Allow the chatbox to take up the remaining vertical space. */
+  overflow-y: auto; /* Add a vertical scrollbar when content overflows. */
+  width: 100%;
+  padding: 20px; /* Add padding to create space for conversation. */
+  text-align: left;
 }
 
+/* done */
+.bottom-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #ccc; /* Simplify border definition. */
+  background-color: #ffffff; 
+  z-index: 1; /* Keep it above the chatbox. */
+  position: sticky;
+  bottom: 0; /* Stick to the bottom of the viewport. */
+}
+
+.input-container {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  max-width: 650px;
+  position: sticky;
+  bottom: 0; /* Stick to the bottom of the viewport. */
+  background-color: #fff; /* Ensure the input container is opaque. */
+  z-index: 1; /* Keep it above the chatbox. */
+}
+
+input[type="text"] {
+  flex: 1; /* Allow the input field to grow to fill available space. */
+  border: 1px solid #ccc;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  padding: 12px 15px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+#send {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  margin-right: 10px;
+  bottom: 18px;
+}
+
+/* to test */
 .link {
-    margin-top: 30px;
-    font-size: 14px;
-    color: #666;
-    text-decoration: none;
+  color: #858585;
+  font-size: 14px;
+  margin-bottom: 5px;
 }
+
+/* done */
+input:focus {
+  outline: none;
+}
+
+.user-avatar {
+    width: 8%;
+    border-radius: 50%; 
+    margin-right: 10px; 
+    vertical-align: middle;
+    margin-bottom: auto;
+}
+
+.bot-avatar {
+    width: 8%;
+    border-radius: 50%; 
+    margin-right: 10px; 
+    vertical-align: middle;
+    margin-bottom: auto;
+}
+
+.message {
+  align-items: center;
+  display: flex;
+}
+
+.user {
+  /* background-color: #fff; */
+  color: #000;
+  padding: 10px;
+  border-bottom-color: #dbdbdb;
+  border-bottom-style: solid;  
+  border-bottom-width: thin;
+  border-top-color: #dbdbdb;
+  border-top-style: solid;  
+  border-top-width: thin;
+}
+
+.bot {
+  background-color: #f0f0f0;
+  color: #000;
+  padding: 10px;
+  border-bottom-color: #dbdbdb;
+  border-bottom-style: solid;  
+  border-bottom-width: thin;
+  border-top-color: #dbdbdb;
+  border-top-style: solid;  
+  border-top-width: thin;
+}
+
